@@ -1,0 +1,52 @@
+/*
+// Definition for a Node.
+public class Node {
+    public int val;
+    public IList<Node> children;
+
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, IList<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+}
+*/
+
+public class Solution {
+    Queue<Node> q = new Queue<Node>();
+    
+    public IList<IList<int>> LevelOrder(Node root) {
+        if(root == null) return new List<IList<int>>();
+        
+        IList<IList<int>> results = new List<IList<int>>();
+        
+        q.Enqueue(root);
+        
+        while(q.Count() != 0){
+            int size = q.Count();            
+            IList<int> tmp = new List<int>();
+
+            while(size-- > 0){
+                Node firstNode = q.Dequeue();
+                tmp.Add(firstNode.val); 
+                
+                foreach(var child in firstNode.children)
+                    {
+                        if(child != null){
+                            q.Enqueue(child);
+                        }
+                    };
+            }
+              
+            results.Add(tmp);
+        }
+              
+        return results;
+    }
+}
+

@@ -1,0 +1,37 @@
+/**
+ * // Definition for a Node.
+ * function Node(val,children) {
+ *    this.val = val;
+ *    this.children = children;
+ * };
+ */
+
+/**
+ * @param {Node} root
+ * @return {number[][]}
+ */
+var levelOrder = function(root) {
+    if(!root) return [];
+    
+    let results = [];
+    let queue = [root];
+    
+    while(queue.length > 0){
+        let size = queue.length;        
+        
+        let tmp = [];
+        while(size-- > 0){
+            let firstNode = queue.shift();
+            
+            tmp.push(firstNode.val)
+            for(children of firstNode.children){
+                queue.push(children);
+            }
+        }
+        
+        results.push(tmp);
+    }
+    
+    return results;
+};
+
